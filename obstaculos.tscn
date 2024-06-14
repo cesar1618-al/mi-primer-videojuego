@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://TUBO.tscn" type="PackedScene" id=1]
+[ext_resource path="res://obstaculos.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20.9019, 65 )
+
+[node name="obstaculos" type="Node2D" groups=[
+"obstaculos",
+]]
+position = Vector2( -2, 382 )
+script = ExtResource( 2 )
+
+[node name="TUBO" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 75 )
+
+[node name="TUBO2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 4, -75 )
+rotation = -3.14159
+
+[node name="zonapuntos" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="zonapuntos"]
+shape = SubResource( 1 )
+[connection signal="body_entered" from="TUBO" to="." method="_on_TUBO_body_entered"]
+[connection signal="body_entered" from="TUBO2" to="." method="_on_TUBO_body_entered"]
+[connection signal="body_exited" from="zonapuntos" to="." method="_on_zonapuntos_body_exited"]
